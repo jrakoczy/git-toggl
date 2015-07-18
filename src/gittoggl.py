@@ -19,16 +19,16 @@ def popup_menu():
     menu = Gtk.Menu() 
  
     item_about = Gtk.MenuItem(label="00:00 Start") 
-    menu.append(item_About) 
+    menu.append(item_about) 
     
     item_quit = Gtk.MenuItem(label="Commit") 
-    menu.append(item_Quit)
+    menu.append(item_quit)
      
     item_overview = Gtk.MenuItem(label="Overview") 
-    menu.append(item_Overview)
+    menu.append(item_overview)
     
     item_pref = Gtk.MenuItem(label="Preferences") 
-    menu.append(item_Pref) 
+    menu.append(item_pref) 
     
     menu.show_all() 
  
