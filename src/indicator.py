@@ -2,6 +2,8 @@ import os
 import signal
 from gi.repository import Gtk, GLib
 from gi.repository import AppIndicator3 as AppIndicator
+from windows import CommitWindow
+from windows import SettingsWindow
  
 APPINDICATOR_ID = 'GittogglIndicator'
 
@@ -43,16 +45,16 @@ class IndicatorMenu(Gtk.Menu):
         self.append(overview_item)
 
         quit_item = Gtk.MenuItem(label=self.QUIT_LABEL_TEXT)
-        quit_item.connect('activate', lambda q: Gtk.main_quit())
+        quit_item.connect('activate', lambda i: Gtk.main_quit())
         self.append(quit_item)
 
-    def _open_commit_window(self):
-        pass
+    def _open_commit_window(self, item):
+        CommitWindow()
 
-    def _open_settings_window(self):
-        pass
+    def _open_settings_window(self, item):
+        SettingsWindow()
 
-    def _open_overview_window(self):
+    def _open_overview_window(self, item):
         pass
 
 
@@ -62,7 +64,7 @@ class TimerMenuItem(Gtk.MenuItem):
     PLAY_SYMBOL = u'\u25b6'
     PAUSE_SYMBOL = u'\u25ae' + u'\u25ae'
  
-    def __init__(self, menu):
+    def __init__(self):
         super().__init__()
         self._timer = None
         self.reset_timer() 

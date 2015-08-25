@@ -1,0 +1,26 @@
+GtkButton { 
+    font-weight: bold; 
+ }
+
+GtkBox {
+    background-color: #fff;
+    border: 1px solid #aaa;
+}
+
+GtkScrolledWindow {
+    border-color: #aaa;
+}
+
+
+GtkEntry {
+    background: none;
+    border-radius: 0;
+}
+
+GtkEntry:focus {
+    border-color: #aaa;
+}
+
+GtkLabel#AuthorsHintLabel {
+    color: #888;
+}
