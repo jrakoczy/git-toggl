@@ -30,7 +30,8 @@ class IndicatorMenu(Gtk.Menu):
         self.show_all()
         
     def _build_indicator_menu(self):
-        self.append(TimerMenuItem())        
+        self._timer_item = TimerMenuItem()
+        self.append(self._timer_item)        
 
         commit_item = Gtk.MenuItem(label=self.COMMIT_LABEL_TEXT)
         commit_item.connect('activate', self._open_commit_window)
@@ -49,7 +50,7 @@ class IndicatorMenu(Gtk.Menu):
         self.append(quit_item)
 
     def _open_commit_window(self, item):
-        CommitWindow()
+        CommitWindow(self._timer_item)
 
     def _open_settings_window(self, item):
         SettingsWindow()
@@ -69,12 +70,15 @@ class TimerMenuItem(Gtk.MenuItem):
         self._timer = None
         self.reset_timer() 
         self.connect('activate', self._switch_timer_state)
-    
+       
+    @property
+    def current_time(self):
+        return self._current_time    
+
     def reset_timer(self):
         self._current_time = 0  
         self._stop_timer()
         
-
     def _switch_timer_state(self, item):
         if self._is_ticking:
             self._stop_timer()
