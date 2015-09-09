@@ -29,7 +29,14 @@ def commit(git_dir, subject, time, handles):
     _execute_git_command(git_commit_command) 
 
 
+def show(git_dir, sha):
+    git_show_command = [ 'git', '-C', git_dir, 'log', sha, '-n', '1', '--pretty=format:%b' ]
+    
+    return _execute_git_command(git_show_command)
+
+
 def _execute_git_command(command):
     process = subprocess.Popen(command, stdout=PIPE, stderr=PIPE)
     stdoutput, stderroutput = process.communicate()
-
+    return stdoutput
+    

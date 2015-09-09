@@ -93,6 +93,13 @@ class OverviewWindow(GenericWindow):
     OBJECT_NAME = 'OverviewWindow'
 
     def __init__(self):
-        handlers = {}
+        handlers = {'onShaEntered' : self._show_time}
         super().__init__(self.BUILDER_PATH, self.OBJECT_NAME, handlers)
 
+    def _show_time(self):
+        commit_label = self._builder.get_object('CommitLabel')
+        sha_entry = self._builder.get_object('ShaEntry')
+        data = settings.load_settings()
+        git_dir = data['directory']
+        commit_text = git.show(git_dir, sha_entry.get_text())
+        commit_label.set_text(commit_text)
