@@ -1,6 +1,7 @@
 from gi.repository import Gtk, Gdk
 import git
 import indicator
+import settings
 
 class GenericWindow(Gtk.Window):
 
@@ -32,6 +33,20 @@ class SettingsWindow(GenericWindow):
         handlers = { 'onSaveClicked': self._save_settings }
     
         super().__init__(self.BUILDER_PATH, self.OBJECT_NAME, handlers)
+        self._load_settings()
+
+    def _load_settings(self):
+        dir_entry = self._builder.get_object('DirEntry')
+        handle_entry = self._builder.get_object('HandleEntry')
+        key_entry = self._builder.get_object('KeyEntry')
+        pid_entry = self._builder.get_object('PIDEntry')  
+  
+        data = settings.load_settings() 
+
+        dir_entry.set_text(data['directory'])
+        handle_entry.set_text(data['handle'])
+        key_entry.set_text(data['key'])
+        pid_entry.set_text(data['pid'])
 
     def _save_settings(self, button):
         dir_entry = self._builder.get_object('DirEntry')
@@ -41,7 +56,9 @@ class SettingsWindow(GenericWindow):
         
         git.set_api_key(dir_entry.get_text(), handle_entry.get_text(), key_entry.get_text())
         git.set_pid(dir_entry.get_text(), pid_entry.get_text())    
-
+        
+        settings.save_settings(dir_entry.get_text(), handle_entry.get_text(),\
+                               key_entry.get_text(), pid_entry.get_text())
 
 class CommitWindow(GenericWindow):
     BUILDER_PATH = '../data/layouts/commit_window.glade'
@@ -69,4 +86,13 @@ class CommitWindow(GenericWindow):
         hours, minutes = divmod(minutes, 60)
 
         return "%d h %d min" % (hours, minutes)         
-    
+
+
+class OverviewWindow(GenericWindow): 
+    BUILDER_PATH = '../data/layouts/overview_window.glade'
+    OBJECT_NAME = 'OverviewWindow'
+
+    def __init__(self):
+        handlers = {}
+        super().__init__(self.BUILDER_PATH, self.OBJECT_NAME, handlers)
+

@@ -3,7 +3,7 @@
 <interface>
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkApplicationWindow" id="CommitWindow">
-    <property name="width_request">420</property>
+    <property name="width_request">500</property>
     <property name="can_focus">False</property>
     <property name="events"/>
     <property name="title" translatable="yes">Commit</property>
@@ -20,14 +20,14 @@
         <property name="orientation">vertical</property>
         <property name="baseline_position">top</property>
         <child>
-          <object class="GtkLabel" id="MessageLabel">
+          <object class="GtkLabel" id="SubjectLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="opacity">0.96999999999999997</property>
             <property name="halign">start</property>
             <property name="margin_left">20</property>
             <property name="margin_top">10</property>
-            <property name="label" translatable="yes">Message</property>
+            <property name="label" translatable="yes">Subject:</property>
             <property name="angle">0.099999997764825821</property>
             <property name="lines">1</property>
             <property name="xalign">0</property>
@@ -40,37 +40,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow1">
-            <property name="width_request">320</property>
+          <object class="GtkEntry" id="SubjectEntry">
+            <property name="width_request">400</property>
+            <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="halign">center</property>
-            <property name="margin_left">20</property>
-            <property name="margin_right">20</property>
             <property name="margin_top">5</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="shadow_type">in</property>
-            <property name="min_content_height">60</property>
-            <child>
-              <object class="GtkViewport" id="viewport1">
-                <property name="width_request">320</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <child>
-                  <object class="GtkTextView" id="MessageTextView">
-                    <property name="width_request">320</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="events"/>
-                    <property name="halign">center</property>
-                    <property name="margin_top">1</property>
-                    <property name="margin_bottom">1</property>
-                    <property name="wrap_mode">word-char</property>
-                  </object>
-                </child>
-              </object>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -92,13 +68,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="AuthorsLabel">
+          <object class="GtkLabel" id="HandlesLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="events"/>
             <property name="halign">start</property>
             <property name="margin_left">20</property>
-            <property name="label" translatable="yes">Authors</property>
+            <property name="label" translatable="yes">Handles:</property>
             <property name="ellipsize">end</property>
             <property name="track_visited_links">False</property>
             <property name="xalign">0</property>
@@ -117,7 +93,7 @@
             <property name="opacity">0.97999999999999998</property>
             <property name="halign">start</property>
             <property name="margin_left">20</property>
-            <property name="label" translatable="yes">Comma separated</property>
+            <property name="label" translatable="yes">Space separated</property>
             <property name="angle">0.099999997764825821</property>
             <property name="lines">1</property>
             <property name="xalign">0</property>
@@ -135,8 +111,8 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="AuthorsEntry">
-            <property name="width_request">320</property>
+          <object class="GtkEntry" id="HandlesEntry">
+            <property name="width_request">400</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -176,6 +152,7 @@
             <property name="relief">half</property>
             <property name="xalign">0</property>
             <property name="yalign">0</property>
+            <signal name="clicked" handler="onCommitClicked" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>

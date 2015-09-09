@@ -2,8 +2,7 @@ import os
 import signal
 from gi.repository import Gtk, GLib
 from gi.repository import AppIndicator3 as AppIndicator
-from windows import CommitWindow
-from windows import SettingsWindow
+from windows import SettingsWindow, CommitWindow, OverviewWindow
  
 APPINDICATOR_ID = 'GittogglIndicator'
 
@@ -56,7 +55,7 @@ class IndicatorMenu(Gtk.Menu):
         SettingsWindow()
 
     def _open_overview_window(self, item):
-        pass
+        OverviewWindow() 
 
 
 
